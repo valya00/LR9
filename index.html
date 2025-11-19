@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+	<title>Гра: 21</title>
+    <link rel="stylesheet" href="LR9.css">
+</head>
+<body>
+<h1>Гра "21"</h1>
+<div class="container">
+<div>
+  <div class="box" id="userScore">User: 0</div>
+  <img id="userCard" class="card-img">
+</div>
+<div>
+<div class="box" id="roundBox">Спроба 1 з 3</div>
+</div>
+<div>
+  <div class="box" id="compScore">Computer: 0</div>
+  <img id="compCard" class="card-img">
+</div>
+</div>
+<button id="generate">Грати</button>
+<button id="reset">Почати заново</button>
+<div id="winner"></div>
+<script>
+let username = prompt("Введіть ваше ім'я:");
+if (!username || username.trim() === "") username = "User";
+const userScoreEl = document.getElementById("userScore");
+const compScoreEl = document.getElementById("compScore");
+const roundBoxEl = document.getElementById("roundBox");
+const userCardEl = document.getElementById("userCard");
+const compCardEl = document.getElementById("compCard");
+const winnerEl = document.getElementById("winner");
+const generateBtn = document.getElementById("generate");
+const resetBtn = document.getElementById("reset");
+userScoreEl.innerText = `${username}: 0`;
+const cards = [
+        {img: "6.png", value: 6},
+        {img: "7.png", value: 7},
+        {img: "8.png", value: 8},
+        {img: "9(1).png", value: 9},
+        {img: "10(1).png", value: 10},
+        {img: "valet.jpg", value: 2},
+        {img: "dama.png", value: 3},
+        {img: "korol.png", value: 4},
+        {img: "tuz.png", value: 11}
+];
+let userPoints = 0;
+let compPoints = 0;
+let round = 1;
+function playRound() {
+if (round > 3) return;
+const uc = cards[Math.floor(Math.random() * cards.length)];
+const cc = cards[Math.floor(Math.random() * cards.length)];
+userCardEl.src = "images/" + uc.img;
+compCardEl.src = "images/" + cc.img;
+userPoints += uc.value;
+compPoints += cc.value;
+userScoreEl.innerText = `${username}: ${userPoints}`;
+compScoreEl.innerText = `Computer: ${compPoints}`;
+roundBoxEl.innerText = `Спроба ${round} з 3`;
+round++;
+if (round === 4) showWinner();
+}
+function showWinner() {
+winnerEl.style.display = "block";
+generateBtn.style.display = "none";
+resetBtn.style.display = "inline-block";
+if (userPoints > compPoints) {
+winnerEl.innerText = `${username} переміг!`;
+winnerEl.style.color = "green";
+} else if (userPoints < compPoints) {
+winnerEl.innerText = `Комп'ютер переміг!`;
+winnerEl.style.color = "red";
+} else {
+winnerEl.innerText = "Нічия!";
+winnerEl.style.color = "blue";
+}
+}
+function resetGame() {
+userPoints = 0;
+compPoints = 0;
+round = 1;
+userScoreEl.innerText = `${username}: 0`;
+compScoreEl.innerText = `Computer: 0`;
+roundBoxEl.innerText = `Спроба 1 з 3`;
+userCardEl.src = "";
+compCardEl.src = "";
+winnerEl.style.display = "none";
+generateBtn.style.display = "inline-block";
+resetBtn.style.display = "none";
+}
+generateBtn.onclick = playRound;
+resetBtn.onclick = resetGame;
+</script>
+</body>
