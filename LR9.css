@@ -1,0 +1,45 @@
+body {
+text-align: center;
+font-family: Arial, sans-serif;
+background: linear-gradient(to right,  #DEB887,  #F5DEB3);
+padding: 20px;
+}
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 60px;
+margin-top: 20px;
+}
+.box {
+background: #dff0ff;
+padding: 15px 25px;
+border-radius: 10px;
+font-size: 22px;
+font-weight: bold;
+}
+.card-img {
+width: 180px;
+height: auto;
+margin-top: 20px;
+border-radius: 10px;
+}
+button {
+margin-top: 20px;
+padding: 12px 35px;
+font-size: 22px;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+}
+#generate { background: #00cc00; color: #fff; }
+#reset { background: #ff6600; color: #fff; display: none; }
+#winner {
+margin-top: 25px;
+font-size: 28px;
+font-weight: bold;
+display: none;
+}
+@media(max-width: 600px){
+.container { flex-direction: column; }
+}
